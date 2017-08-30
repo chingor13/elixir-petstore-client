@@ -26,9 +26,8 @@ defmodule Petstore.Api.Store do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec delete_order(Tesla.Env.client, Integer.t, keyword()) :: {:ok, struct()}
+  @spec delete_order(Tesla.Env.client, Integer.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def delete_order(connection, order_id, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -39,7 +38,7 @@ defmodule Petstore.Api.Store do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -53,12 +52,11 @@ defmodule Petstore.Api.Store do
 
   ## Returns
 
-  {:ok, %Petstore.Model.Map[String, Integer]{}} on success
+  {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec get_inventory(Tesla.Env.client, keyword()) :: {:ok, %Petstore.Model.Map[String, Integer]{}}
+  @spec get_inventory(Tesla.Env.client, keyword()) :: {:ok, map()} | {:error, Tesla.Env.t}
   def get_inventory(connection, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -69,7 +67,7 @@ defmodule Petstore.Api.Store do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%Petstore.Model.Map[String, Integer]{})
+    |> decode()
   end
 
   @doc """
@@ -87,9 +85,8 @@ defmodule Petstore.Api.Store do
   {:ok, %Petstore.Model.Order{}} on success
   {:error, info} on failure
   """
-  @spec get_order_by_id(Tesla.Env.client, Integer.t, keyword()) :: {:ok, %Petstore.Model.Order{}}
+  @spec get_order_by_id(Tesla.Env.client, Integer.t, keyword()) :: {:ok, Petstore.Model.Order.t} | {:error, Tesla.Env.t}
   def get_order_by_id(connection, order_id, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -118,9 +115,8 @@ defmodule Petstore.Api.Store do
   {:ok, %Petstore.Model.Order{}} on success
   {:error, info} on failure
   """
-  @spec place_order(Tesla.Env.client, Order.t, keyword()) :: {:ok, %Petstore.Model.Order{}}
+  @spec place_order(Tesla.Env.client, Petstore.Model.Order.t, keyword()) :: {:ok, Petstore.Model.Order.t} | {:error, Tesla.Env.t}
   def place_order(connection, body, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }

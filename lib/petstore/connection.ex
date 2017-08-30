@@ -12,6 +12,7 @@ defmodule Petstore.Connection do
   # Add any middleware here (authentication)
   plug Tesla.Middleware.BaseUrl, "http://petstore.swagger.io/v2"
   plug Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"}
+  plug Tesla.Middleware.JSON
 
   @scopes [
     "write:pets", # modify pets in your account
@@ -48,9 +49,20 @@ defmodule Petstore.Connection do
 
   Tesla.Env.client
   """
-  @spec new((([String.t, ...]) -> String.t)) :: Tesla.Env.client
+  @spec new(((list(String.t)) -> String.t)) :: Tesla.Env.client
   def new(token_fetcher) when is_function(token_fetcher) do
     token_fetcher.(@scopes)
     |> new
+  end
+  @doc """
+  Configure an authless client connection
+
+  # Returns
+
+  Tesla.Env.client
+  """
+  @spec new() :: Tesla.Env.client
+  def new do
+    Tesla.build_client([])
   end
 end

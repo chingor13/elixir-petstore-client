@@ -26,9 +26,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec create_user(Tesla.Env.client, User.t, keyword()) :: {:ok, struct()}
+  @spec create_user(Tesla.Env.client, Petstore.Model.User.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def create_user(connection, body, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -40,7 +39,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -58,9 +57,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec create_users_with_array_input(Tesla.Env.client, [List[User], ...], keyword()) :: {:ok, struct()}
+  @spec create_users_with_array_input(Tesla.Env.client, list(Petstore.Model.User.t), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def create_users_with_array_input(connection, body, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -72,7 +70,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -90,9 +88,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec create_users_with_list_input(Tesla.Env.client, [List[User], ...], keyword()) :: {:ok, struct()}
+  @spec create_users_with_list_input(Tesla.Env.client, list(Petstore.Model.User.t), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def create_users_with_list_input(connection, body, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -104,7 +101,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -122,9 +119,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec delete_user(Tesla.Env.client, String.t, keyword()) :: {:ok, struct()}
+  @spec delete_user(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def delete_user(connection, username, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -135,7 +131,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -153,9 +149,8 @@ defmodule Petstore.Api.User do
   {:ok, %Petstore.Model.User{}} on success
   {:error, info} on failure
   """
-  @spec get_user_by_name(Tesla.Env.client, String.t, keyword()) :: {:ok, %Petstore.Model.User{}}
+  @spec get_user_by_name(Tesla.Env.client, String.t, keyword()) :: {:ok, Petstore.Model.User.t} | {:error, Tesla.Env.t}
   def get_user_by_name(connection, username, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -185,9 +180,8 @@ defmodule Petstore.Api.User do
   {:ok, %Petstore.Model.String{}} on success
   {:error, info} on failure
   """
-  @spec login_user(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, %Petstore.Model.String{}}
+  @spec login_user(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def login_user(connection, username, password, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -200,7 +194,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%Petstore.Model.String{})
+    |> decode()
   end
 
   @doc """
@@ -217,9 +211,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec logout_user(Tesla.Env.client, keyword()) :: {:ok, struct()}
+  @spec logout_user(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def logout_user(connection, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -230,7 +223,7 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 
   @doc """
@@ -249,9 +242,8 @@ defmodule Petstore.Api.User do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec update_user(Tesla.Env.client, String.t, User.t, keyword()) :: {:ok, struct()}
+  @spec update_user(Tesla.Env.client, String.t, Petstore.Model.User.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def update_user(connection, username, body, opts \\ []) do
-    # build optional param name => where
     optional_params = %{
       
     }
@@ -263,6 +255,6 @@ defmodule Petstore.Api.User do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%{})
+    |> decode()
   end
 end

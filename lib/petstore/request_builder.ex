@@ -82,6 +82,7 @@ defmodule Petstore.RequestBuilder do
   Map
   """
   @spec add_param(map(), :atom, :atom, any()) :: map()
+  def add_param(request, :body, :body, value), do: Map.put(request, :body, value)
   def add_param(request, location, key, value) do
     Map.update(request, location, [{key, value}], &(&1 ++ [{key, value}]))
   end
@@ -100,10 +101,14 @@ defmodule Petstore.RequestBuilder do
   {:error, info} on failure
   """
   @spec decode(Tesla.Env.t) :: {:ok, struct()} | {:error, Tesla.Env.t}
-  def decode(env), do: decode(env, %{})
+  def decode(%Tesla.Env{status: 200, body: body}), do: {:ok, body}
+  def decode(response) do
+    {:error, response}
+  end
   @spec decode(Tesla.Env.t, struct()) :: {:ok, struct()} | {:error, Tesla.Env.t}
+  def decode(%Tesla.Env{status: 200, body: body}, ""), do: {:ok, body}
   def decode(%Tesla.Env{status: 200, body: body}, struct) do
-    Poison.decode(body, as: struct)
+    {:ok, Poison.Decode.decode(body, as: struct)}
   end
   def decode(response, _struct) do
     {:error, response}

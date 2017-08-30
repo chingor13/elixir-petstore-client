@@ -27,16 +27,11 @@ defmodule Petstore.Api.Pet do
   {:error, info} on failure
   """
   @spec add_pet(Tesla.Env.client, Petstore.Model.Pet.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
-  def add_pet(connection, body, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def add_pet(connection, body, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/pet")
     |> add_param(:body, :"body", body)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode()
@@ -63,7 +58,6 @@ defmodule Petstore.Api.Pet do
     optional_params = %{
       :"api_key" => :headers
     }
-
     %{}
     |> method(:delete)
     |> url("/pet/#{pet_id}")
@@ -89,16 +83,11 @@ defmodule Petstore.Api.Pet do
   {:error, info} on failure
   """
   @spec find_pets_by_status(Tesla.Env.client, list(String.t), keyword()) :: {:ok, list(Petstore.Model.Pet.t)} | {:error, Tesla.Env.t}
-  def find_pets_by_status(connection, status, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def find_pets_by_status(connection, status, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/pet/findByStatus")
     |> add_param(:query, :"status", status)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode([%Petstore.Model.Pet{}])
@@ -120,16 +109,11 @@ defmodule Petstore.Api.Pet do
   {:error, info} on failure
   """
   @spec find_pets_by_tags(Tesla.Env.client, list(String.t), keyword()) :: {:ok, list(Petstore.Model.Pet.t)} | {:error, Tesla.Env.t}
-  def find_pets_by_tags(connection, tags, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def find_pets_by_tags(connection, tags, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/pet/findByTags")
     |> add_param(:query, :"tags", tags)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode([%Petstore.Model.Pet{}])
@@ -151,15 +135,10 @@ defmodule Petstore.Api.Pet do
   {:error, info} on failure
   """
   @spec get_pet_by_id(Tesla.Env.client, Integer.t, keyword()) :: {:ok, Petstore.Model.Pet.t} | {:error, Tesla.Env.t}
-  def get_pet_by_id(connection, pet_id, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def get_pet_by_id(connection, pet_id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/pet/#{pet_id}")
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%Petstore.Model.Pet{})
@@ -181,16 +160,11 @@ defmodule Petstore.Api.Pet do
   {:error, info} on failure
   """
   @spec update_pet(Tesla.Env.client, Petstore.Model.Pet.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
-  def update_pet(connection, body, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def update_pet(connection, body, _opts \\ []) do
     %{}
     |> method(:put)
     |> url("/pet")
     |> add_param(:body, :"body", body)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode()
@@ -219,7 +193,6 @@ defmodule Petstore.Api.Pet do
       :"name" => :form,
       :"status" => :form
     }
-
     %{}
     |> method(:post)
     |> url("/pet/#{pet_id}")
@@ -252,7 +225,6 @@ defmodule Petstore.Api.Pet do
       :"additionalMetadata" => :form,
       :"file" => :form
     }
-
     %{}
     |> method(:post)
     |> url("/pet/#{pet_id}/uploadImage")

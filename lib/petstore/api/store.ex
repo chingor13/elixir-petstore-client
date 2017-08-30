@@ -27,15 +27,10 @@ defmodule Petstore.Api.Store do
   {:error, info} on failure
   """
   @spec delete_order(Tesla.Env.client, Integer.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
-  def delete_order(connection, order_id, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def delete_order(connection, order_id, _opts \\ []) do
     %{}
     |> method(:delete)
     |> url("/store/order/#{order_id}")
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode()
@@ -56,15 +51,10 @@ defmodule Petstore.Api.Store do
   {:error, info} on failure
   """
   @spec get_inventory(Tesla.Env.client, keyword()) :: {:ok, map()} | {:error, Tesla.Env.t}
-  def get_inventory(connection, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def get_inventory(connection, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/store/inventory")
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode()
@@ -86,15 +76,10 @@ defmodule Petstore.Api.Store do
   {:error, info} on failure
   """
   @spec get_order_by_id(Tesla.Env.client, Integer.t, keyword()) :: {:ok, Petstore.Model.Order.t} | {:error, Tesla.Env.t}
-  def get_order_by_id(connection, order_id, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def get_order_by_id(connection, order_id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/store/order/#{order_id}")
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%Petstore.Model.Order{})
@@ -116,16 +101,11 @@ defmodule Petstore.Api.Store do
   {:error, info} on failure
   """
   @spec place_order(Tesla.Env.client, Petstore.Model.Order.t, keyword()) :: {:ok, Petstore.Model.Order.t} | {:error, Tesla.Env.t}
-  def place_order(connection, body, opts \\ []) do
-    optional_params = %{
-      
-    }
-
+  def place_order(connection, body, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/store/order")
     |> add_param(:body, :"body", body)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%Petstore.Model.Order{})

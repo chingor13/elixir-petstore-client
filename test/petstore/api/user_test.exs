@@ -2,7 +2,7 @@ defmodule Petstore.Api.UserTest do
   use ExUnit.Case
   doctest Petstore.Api.User
 
-  @moduletag :external
+  @moduletag external: true, user: true
 
   test "login" do
     {:ok, "logged in user session:" <> session_id} = Petstore.Connection.new

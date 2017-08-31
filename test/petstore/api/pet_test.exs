@@ -29,6 +29,14 @@ defmodule Petstore.Api.PetTest do
     {:ok, updated_pet} = Poison.decode(updated_pet_json, as: %Petstore.Model.Pet{})
     assert %{id: ^id, status: "pending"} = updated_pet
 
+    # # test update pet with form
+    # {:ok, ""} = conn
+    # |> Petstore.Api.Pet.update_pet_with_form(id, [status: "sold"])
+    #
+    # {:ok, updated_pet} = conn
+    # |> Petstore.Api.Pet.get_pet_by_id(id)
+    # assert %{id: ^id, status: "sold"} = updated_pet
+
     # test delete pet
     {:ok, ""} = conn
     |> Petstore.Api.Pet.delete_pet(id)
@@ -68,8 +76,8 @@ defmodule Petstore.Api.PetTest do
     assert %Petstore.Model.Tag{} = tag
   end
 
-  test "find_pets_by_tags" do
-
+  test "upload_file" do
+    flunk("Tesla does not support multi-part upload yet")
   end
 
   test "update_pet_with_form" do

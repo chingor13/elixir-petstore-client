@@ -34,7 +34,7 @@ defmodule Petstore.Api.User do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -60,7 +60,7 @@ defmodule Petstore.Api.User do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -86,7 +86,7 @@ defmodule Petstore.Api.User do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -111,7 +111,7 @@ defmodule Petstore.Api.User do
     |> url("/user/#{username}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -164,7 +164,7 @@ defmodule Petstore.Api.User do
     |> add_param(:query, :"password", password)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -188,7 +188,7 @@ defmodule Petstore.Api.User do
     |> url("/user/logout")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -215,6 +215,6 @@ defmodule Petstore.Api.User do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 end

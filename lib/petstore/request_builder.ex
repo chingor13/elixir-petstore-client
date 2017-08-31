@@ -101,14 +101,14 @@ defmodule Petstore.RequestBuilder do
   {:error, info} on failure
   """
   @spec decode(Tesla.Env.t) :: {:ok, struct()} | {:error, Tesla.Env.t}
-  def decode(%Tesla.Env{status: 200, body: body}), do: {:ok, body}
+  def decode(%Tesla.Env{status: 200, body: body}), do: Poison.decode(body)
   def decode(response) do
     {:error, response}
   end
   @spec decode(Tesla.Env.t, struct()) :: {:ok, struct()} | {:error, Tesla.Env.t}
-  def decode(%Tesla.Env{status: 200, body: body}, ""), do: {:ok, body}
+  def decode(%Tesla.Env{status: 200, body: body}, false), do: {:ok, body}
   def decode(%Tesla.Env{status: 200, body: body}, struct) do
-    {:ok, Poison.Decode.decode(body, as: struct)}
+    Poison.decode(body, as: struct)
   end
   def decode(response, _struct) do
     {:error, response}

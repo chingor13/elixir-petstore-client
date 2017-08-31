@@ -34,7 +34,7 @@ defmodule Petstore.Api.Pet do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -64,7 +64,7 @@ defmodule Petstore.Api.Pet do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -167,7 +167,7 @@ defmodule Petstore.Api.Pet do
     |> add_param(:body, :"body", body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """
@@ -199,7 +199,7 @@ defmodule Petstore.Api.Pet do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """

@@ -12,7 +12,7 @@ defmodule Petstore.Connection do
   # Add any middleware here (authentication)
   plug Tesla.Middleware.BaseUrl, "http://petstore.swagger.io/v2"
   plug Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"}
-  plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.EncodeJson
 
   @scopes [
     "write:pets", # modify pets in your account

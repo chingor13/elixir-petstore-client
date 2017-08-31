@@ -33,7 +33,7 @@ defmodule Petstore.Api.Store do
     |> url("/store/order/#{order_id}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode()
+    |> decode(false)
   end
 
   @doc """

@@ -8,25 +8,26 @@ defmodule Petstore.Api.PetTest do
     conn = Petstore.Connection.new()
     pet = %Petstore.Model.Pet{name: "Jeff test", status: "available"}
 
-    {:ok, new_pet} = conn
+    {:ok, new_pet_json} = conn
     |> Petstore.Api.Pet.add_pet(pet)
 
-    id = Map.get(new_pet, "id")
-    assert id
+    # TODO: when the swagger spec is fixed, this return type should be a Petstore.Model.Pet struct
+    {:ok, new_pet} = Poison.decode(new_pet_json, as: %Petstore.Model.Pet{})
 
-    # TODO: when the swagger spec is fixed, this return type should be a Petstore.ModelPet struct
-    # assert_valid_pet(new_pet)
+    assert_valid_pet(new_pet)
+    id = new_pet.id
 
     {:ok, found_pet} = conn
     |> Petstore.Api.Pet.get_pet_by_id(id)
     assert_valid_pet(found_pet)
 
     # test update pet
-    {:ok, updated_pet} = conn
+    {:ok, updated_pet_json} = conn
     |> Petstore.Api.Pet.update_pet(Map.put(found_pet, :status, "pending"))
 
-    assert id == Map.get(updated_pet, "id")
-    assert "pending" == Map.get(updated_pet, "status")
+    # TODO: when the swagger spec is fixed, this return type should be a Petstore.Model.Pet struct
+    {:ok, updated_pet} = Poison.decode(updated_pet_json, as: %Petstore.Model.Pet{})
+    assert %{id: ^id, status: "pending"} = updated_pet
 
     # test delete pet
     {:ok, ""} = conn
@@ -62,6 +63,7 @@ defmodule Petstore.Api.PetTest do
     assert_valid_tag(tag)
     assert_valid_tags(rest)
   end
+  defp assert_valid_tag(nil), do: true
   defp assert_valid_tag(tag) do
     assert %Petstore.Model.Tag{} = tag
   end
